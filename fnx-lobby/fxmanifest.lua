@@ -1,5 +1,6 @@
 fx_version "cerulean"
 
+author "MaXxaM#0511, (By FenixHub)"
 
 game {"gta5"}
 
