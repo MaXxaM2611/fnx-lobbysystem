@@ -30,8 +30,8 @@ end)
 
 
 OpenMenu = function ()
-    exports['menu']:SetTitle("Seleziona Lobby")		
-    exports['menu']:AddButton("Lobby [10] Pistol Mk2" , "Redzone Mk2", "fnx-lobby:setLobby","10",true)	
+    exports['fnx-menu']:SetTitle("Seleziona Lobby")		
+    exports['fnx-menu']:AddButton("Lobby [10] Pistol Mk2" , "Redzone Mk2", "fnx-lobby:setLobby","10",true)	
 end
 
 RegisterCommand("opnemenulobby", function ()
