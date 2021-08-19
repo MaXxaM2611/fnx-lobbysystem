@@ -34,10 +34,10 @@ OpenMenu = function ()
     exports['fnx-menu']:AddButton("Lobby [10] Pistol Mk2" , "Redzone Mk2", "fnx-lobby:setLobby","10",true)	
 end
 
-RegisterCommand("opnemenulobby", function ()
+RegisterCommand("openmenulobby", function ()
     OpenMenu()
 end)
-RegisterKeyMapping('opnemenulobby', 'Menu Lobby', 'keyboard', 'L')
+RegisterKeyMapping('openmenulobby', 'Menu Lobby', 'keyboard', 'L')
 
 
 
