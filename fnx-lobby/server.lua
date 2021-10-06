@@ -6,8 +6,8 @@ RegisterServerEvent("fnx-lobby:playerSpawned",function ()
     local src = source 
     if Lobby[src] == nil then
         SetPlayerRoutingBucket(src,0)
-        Lobby[src] = GetPlayerRoutingBucket(src)
-        TriggerClientEvent("fnx-lobby:getMyLobby",src,GetPlayerRoutingBucket(src))
+        Lobby[src] = 0
+        TriggerClientEvent("fnx-lobby:getMyLobby",src,0)
     end
 end)
 
@@ -17,7 +17,7 @@ RegisterCommand("lobby",function (src,args)
     if src ~= 0 then   
         if #args > 0 and tonumber(args[1]) ~= nil then     
             if Lobby[src] ~= nil and Lobby[src] ~= args[1] then
-                exports["fnx-lobby"]:setLobby(src,args[1])
+                exports["fnx-lobby"].setLobby(src,tonumber(args[1]))
                 TriggerClientEvent("fnx-lobby:notify",src,"Sei entrato nella lobby ~r~["..args[1].."]~w~")      
             else
                 TriggerClientEvent("fnx-lobby:notify",src,"Sei gia in questa lobby")
@@ -32,7 +32,7 @@ RegisterCommand("set_lobby", function (src,args)
     if src ~= 0 then
         if #args > 0 and tonumber(args[1]) and tonumber(args[2]) then
             if GetPerms(src,"set_lobby") then
-                exports["fnx-lobby"]:setLobby(args[1],args[2])
+                exports["fnx-lobby"].setLobby(tonumber(args[1]),tonumber(args[2]))
                 TriggerClientEvent("fnx-lobby:notify",args[1],"Sei stato settato nella lobby ~r~["..args[1].."]~w~".." da: "..GetPlayerName(src))     
                 TriggerClientEvent("fnx-lobby:notify",src,"Hai settato nella lobby ~r~["..args[1].."]~w~".." Player: "..GetPlayerName(src))     
             else
@@ -48,7 +48,7 @@ RegisterCommand("set_all_lobby", function (src,args)
         if #args > 0 and tonumber(args[1]) then
             if GetPerms(src,"set_all_lobby") then
                 for a, b in pairs(GetPlayers()) do
-                   exports["fnx-lobby"]:setLobby(b,args[1])
+                   exports["fnx-lobby"].setLobby(tonumber(b),tonumber(args[1]))
                    TriggerClientEvent("fnx-lobby:notify",b,"Sei stato settato nella lobby ~r~["..args[1].."]~w~".." da: "..GetPlayerName(src))     
                     Citizen.Wait(20)
                 end
@@ -74,15 +74,15 @@ end
 
 
 
-RegisterServerEvent("fnx-lobby:setLobby")
-AddEventHandler("fnx-lobby:setLobby", function (lobby)
+RegisterServerEvent("fnx-lobby.setLobby")
+AddEventHandler("fnx-lobby.setLobby", function (lobby)
 
     local src = source
     if Lobby[src] ~= nil then
     --[[if Config.Redzone[lobby] then
             TriggerClientEvent("fnx-lobby:setData",src,Config.Redzone[lobby])
         end]]
-        exports["fnx-lobby"]:setLobby(src,lobby)
+        exports["fnx-lobby"].setLobby(src,lobby)
     end
 end)
 
@@ -108,7 +108,3 @@ AddEventHandler("playerDropped",function ()
         Lobby[src] = nil
     end
 end)
-
-
-
-
